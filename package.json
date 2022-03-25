@@ -12,9 +12,7 @@
   ],
   "activationEvents": [
     "onCommand:mytools-zack.json2ts",
-    "onLanguage:typescript",
-    "onLanguage:json",
-    "onLanguage:javascript"
+    "onCommand:mytools-zack.translate"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -22,12 +20,20 @@
       {
         "command": "mytools-zack.json2ts",
         "title": "json2ts"
+      },
+      {
+        "command": "mytools-zack.translate",
+        "title": "translate"
       }
     ],
     "menus": {
       "editor/context": [
         {
           "command": "mytools-zack.json2ts",
+          "group": "navigation"
+        },
+        {
+          "command": "mytools-zack.translate",
           "group": "navigation"
         }
       ]
