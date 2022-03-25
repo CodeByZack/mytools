@@ -1,55 +1,61 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import path = require('path');
 import * as vscode from 'vscode';
+import { json2ts } from './json2ts';
+import { translate } from './translate';
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-  console.log(context.extension);
-
-  console.log(vscode);
-  // Use the console to output diagnostic information (console.log) and errors (console.error)
-  // This line of code will only be executed once when your extension is activated
-  console.log('Congratulations, your extension "mytools-zack" is now active!');
-
-  // The command has been defined in the package.json file
-  // Now provide the implementation of the command with registerCommand
-  // The commandId parameter must match the command field in package.json
-  let disposable = vscode.commands.registerCommand(
-    'mytools-zack.helloWorld',
-    async (a, b, c) => {
-      // The code you place here will be executed every time your command is executed
-      // Display a message box to the user
-
+  const disposable = vscode.commands.registerCommand(
+    'mytools-zack.json2ts',
+    async () => {
       let editor = vscode.window.activeTextEditor!;
+      const languageId = editor.document.languageId;
       let selection = editor.selection;
       let msg = editor.document.getText(selection);
-      vscode.window.showInformationMessage(msg);
+      // 根据languageId来把不同语言下的json表达为正常的json字符串。
+      // json 直接就是 json字符串
+      // js 使用Function获得json对象，再stringify
+      // ts 不考虑特殊情况，视为js处理 TODO 处理特殊情况
 
-      vscode.window.showInformationMessage('Hello World from mytools!');
+      switch (languageId) {
+        case 'javascript':
+          const test = Function('"use strict";return (' + msg + ')')();  
+          const str = JSON.stringify(test);
+          msg = str;
+          break;
+        case 'typescript':
+          const test2 = Function('"use strict";return (' + msg + ')')();  
+          const str2 = JSON.stringify(test2);
+          msg = str2;
+          break;
+        case 'json':
+        default:
+      }
+      const interfaceStr = json2ts(msg);
+      if(!interfaceStr){
+        vscode.window.showInformationMessage('出错了！');
+        return;
+      }
+      editor.edit((v) => {
+        v.replace(selection, interfaceStr);
+      });
     },
   );
 
-
-  const dis2 = vscode.languages.registerHoverProvider('json', {
-    provideHover: (document, position) => {
-		const fileName    = document.fileName;
-		const workDir     = path.dirname(fileName);
-		const word        = document.getText(document.getWordRangeAtPosition(position));
-		// console.log(1, document)
-		// console.log(2, position)
-		// console.log(3, token)
-		console.log(4, '这个就是悬停的文字', word)
-		// 支持markdown语法
-		return new vscode.Hover(
-		`${fileName}：${workDir}: ${word}`);
+  const disposable2 = vscode.languages.registerHoverProvider(
+    ['typescript', 'json', 'javascript'],
+    {
+      provideHover: async (document, position) => {
+        const word = document.getText(
+          document.getWordRangeAtPosition(position),
+        );
+        const translateResult = await translate(word);
+        return new vscode.Hover(`${word}:${translateResult}`);
+      },
     },
-  });
+  );
 
   context.subscriptions.push(disposable);
-  context.subscriptions.push(dis2);
+  context.subscriptions.push(disposable2);
 }
 
-// this method is called when your extension is deactivated
 export function deactivate() {}
