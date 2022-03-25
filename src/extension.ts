@@ -37,7 +37,6 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.window.showInformationMessage('出错了！');
         return;
       }
-      vscode.window.showInformationMessage('replace！');
       editor.edit((v) => {
         v.replace(selection, interfaceStr);
       });
@@ -51,14 +50,29 @@ export function activate(context: vscode.ExtensionContext) {
       const selection = editor.selection;
       const selectTxt = document.getText(selection);
       const translateResult = await translate(selectTxt);
-      vscode.window.showInformationMessage('translateResult');
       editor.edit((v) => {
         v.replace(selection, translateResult);
       });
     },
   );
+
+  const disposable3 = vscode.languages.registerHoverProvider(
+    ['typescript', 'json', 'javascript'],
+    {
+      provideHover: async (document, position) => {
+        const word = document.getText(
+          document.getWordRangeAtPosition(position),
+        );
+        const translateResult = await translate(word);
+        return new vscode.Hover(`${word} : \`${translateResult}\``);
+      },
+    },
+  );
+
+
   context.subscriptions.push(disposable);
   context.subscriptions.push(disposable2);
+  context.subscriptions.push(disposable3);
 }
 
 export function deactivate() {}

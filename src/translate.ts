@@ -16,7 +16,7 @@ interface ITranslateResultItem {
   tgt: string;
 }
 
-const youdao_translate = async (str: string) => {
+const youdaoTranslate = async (str: string) => {
   const res = await axios.get<IYouDaoResult>(YOUDAO_API, {
     params: {
       i: str,
@@ -36,7 +36,7 @@ const youdao_translate = async (str: string) => {
 
 const getTool = (type: 'YOUDAO' | 'GOOGLE') => {
   if (type === 'YOUDAO') {
-    return youdao_translate;
+    return youdaoTranslate;
   }
   if (type === 'GOOGLE') {
     return () => '';
@@ -44,10 +44,24 @@ const getTool = (type: 'YOUDAO' | 'GOOGLE') => {
   return () => '';
 };
 
+const TRANSLATE_MAP = new Map<string, string>();
+const MAX_MEMO_SIZE = 100;
+
 export const translate = async (str: string, type: 'YOUDAO' | 'GOOGLE' = 'YOUDAO') => {
+
+  const memoResult = TRANSLATE_MAP.get(str);
+  if (memoResult) {
+    console.log('返回缓存的结果', memoResult);
+    return memoResult;
+  }
+
   const request = getTool(type);
   try {
     const res = await request(str);
+    if (TRANSLATE_MAP.size > MAX_MEMO_SIZE) {
+      TRANSLATE_MAP.clear();
+    }
+    TRANSLATE_MAP.set(str, res);
     return res;
   } catch (error) {
     return '';
