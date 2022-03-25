@@ -1,7 +1,8 @@
 {
   "name": "mytools-zack",
-  "displayName": "mytools",
+  "displayName": "空山工具箱",
   "description": "some tools personal used",
+  "repository": "https://github.com/CodeByZack/mytools",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.64.0"
