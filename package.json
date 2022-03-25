@@ -3,6 +3,7 @@
   "displayName": "空山工具箱",
   "description": "some tools personal used",
   "repository": "https://github.com/CodeByZack/mytools",
+  "publisher": "codebyzack",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.64.0"
@@ -11,8 +12,7 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:mytools-zack.json2ts",
-    "onCommand:mytools-zack.translate"
+    "*"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -29,15 +29,42 @@
     "menus": {
       "editor/context": [
         {
-          "command": "mytools-zack.json2ts",
+          "submenu": "codebyzack.tools",
+          "when": "editorHasSelection",
           "group": "navigation"
+        }
+      ],
+      "codebyzack.tools": [
+        {
+          "command": "mytools-zack.json2ts",
+          "when": "editorHasSelection"
         },
         {
           "command": "mytools-zack.translate",
-          "group": "navigation"
+          "when": "editorHasSelection"
         }
       ]
-    }
+    },
+    "submenus": [
+      {
+        "id": "codebyzack.tools",
+        "label": "mytools"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "mytools-zack.translate",
+        "key": "ctrl+t",
+        "mac": "cmd+t",
+        "when": "editorHasSelection"
+      },
+      {
+        "command": "mytools-zack.json2ts",
+        "key": "ctrl+j",
+        "mac": "cmd+j",
+        "when": "editorHasSelection"
+      }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "yarn run compile",

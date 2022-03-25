@@ -18,11 +18,13 @@ export function activate(context: vscode.ExtensionContext) {
 
       switch (languageId) {
         case 'javascript':
+        case 'javascriptreact':
           const test = Function('"use strict";return (' + msg + ')')();
           const str = JSON.stringify(test);
           msg = str;
           break;
         case 'typescript':
+        case 'typescriptreact':
           const test2 = Function('"use strict";return (' + msg + ')')();
           const str2 = JSON.stringify(test2);
           msg = str2;
@@ -35,6 +37,7 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.window.showInformationMessage('出错了！');
         return;
       }
+      vscode.window.showInformationMessage('replace！');
       editor.edit((v) => {
         v.replace(selection, interfaceStr);
       });
@@ -48,6 +51,7 @@ export function activate(context: vscode.ExtensionContext) {
       const selection = editor.selection;
       const selectTxt = document.getText(selection);
       const translateResult = await translate(selectTxt);
+      vscode.window.showInformationMessage('translateResult');
       editor.edit((v) => {
         v.replace(selection, translateResult);
       });
