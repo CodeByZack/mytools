@@ -5,6 +5,7 @@
   "repository": "https://github.com/CodeByZack/mytools",
   "publisher": "codebyzack",
   "version": "0.0.1",
+  "icon": "image/ks.jpg",
   "engines": {
     "vscode": "^1.64.0"
   },
