@@ -1,0 +1,22 @@
+{
+  "eslint-disable": {
+    "prefix": "eslint-disable",
+    "body": ["// eslint-disable"],
+    "description": "ESLint disable wrapper"
+  },
+  "eslint-disable-line": {
+    "prefix": "eslint-disable-line",
+    "body": ["// eslint-disable-line "],
+    "description": "ESLint disable line"
+  },
+  "eslint-disable-next-line": {
+    "prefix": "eslint-disable-next-line",
+    "body": ["// eslint-disable-next-line"],
+    "description": "ESLint disable next line"
+  },
+  "prettier-ignore": {
+    "prefix": "pre-ignore",
+    "body": ["// prettier-ignore"],
+    "description": "prettier-ignore"
+  }
+}

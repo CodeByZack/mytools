@@ -65,6 +65,24 @@
         "mac": "cmd+j",
         "when": "editorHasSelection"
       }
+    ],
+    "snippets": [
+      {
+        "language": "typescriptreact",
+        "path": "./snippets/typescriptreact.json"
+      },
+      {
+        "language": "typescript",
+        "path": "./snippets/typescriptreact.json"
+      },
+      {
+        "language": "javascript",
+        "path": "./snippets/javascriptreact.json"
+      },
+      {
+        "language": "javascriptreact",
+        "path": "./snippets/javascriptreact.json"
+      }
     ]
   },
   "scripts": {
@@ -74,6 +92,7 @@
     "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
+    "gen-snippets": "node snippets/index.js",
     "pretest": "yarn run compile && yarn run lint",
     "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js"
