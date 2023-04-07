@@ -14,5 +14,4 @@
 ![json2ts](./image/json2ts.gif)
 
 3. 在保存 `markdown` 时自动添加一些有用的头信息，可以通过 `"mytools-zack.autoAddMetaToMarkdown": true` 来进行关闭和打开
-
 ![autoAddMetaToMarkdown](./image/autoAddMetaToMarkdown.gif)
