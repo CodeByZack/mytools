@@ -1,6 +1,6 @@
 {
   "name": "mytools-zack",
-  "displayName": "空山工具箱",
+  "displayName": "ZTools",
   "description": "some tools personal used",
   "repository": "https://github.com/CodeByZack/mytools",
   "publisher": "codebyzack",
@@ -83,7 +83,17 @@
         "language": "javascriptreact",
         "path": "./snippets/javascriptreact.json"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "ZTools",
+      "properties": {
+        "mytools-zack.autoAddMetaToMarkdown": {
+          "type": "boolean",
+          "default": false,
+          "description": "是否在保存 markdown 时，自动添加头信息"
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run esbuild-base -- --minify",
@@ -113,6 +123,9 @@
   },
   "dependencies": {
     "axios": "^0.26.1",
+    "dayjs": "^1.11.7",
+    "front-matter": "^4.0.2",
+    "gray-matter": "^4.0.3",
     "json2tstool": "^1.0.7"
   }
 }

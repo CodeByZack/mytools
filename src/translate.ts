@@ -51,7 +51,6 @@ export const translate = async (str: string, type: 'YOUDAO' | 'GOOGLE' = 'YOUDAO
 
   const memoResult = TRANSLATE_MAP.get(str);
   if (memoResult) {
-    console.log('返回缓存的结果', memoResult);
     return memoResult;
   }
 
