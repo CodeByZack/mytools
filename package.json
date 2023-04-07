@@ -4,7 +4,7 @@
   "description": "some tools personal used",
   "repository": "https://github.com/CodeByZack/mytools",
   "publisher": "codebyzack",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "icon": "image/ks.jpg",
   "engines": {
     "vscode": "^1.64.0"
