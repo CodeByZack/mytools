@@ -66,6 +66,7 @@ export function activate(context: vscode.ExtensionContext) {
         const word = document.getText(
           document.getWordRangeAtPosition(position),
         );
+        console.log(word)
         const translateResult = await translate(word);
         return new vscode.Hover(`${word} : \`${translateResult}\``);
       },

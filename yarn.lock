@@ -31,6 +31,11 @@
   resolved "https://registry.npmjs.org/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
+"@ifyour/deeplx@^0.1.17":
+  version "0.1.17"
+  resolved "https://registry.yarnpkg.com/@ifyour/deeplx/-/deeplx-0.1.17.tgz#bb6921e5bba4fe520f08dc2877d6b66777868ac9"
+  integrity sha512-3tu/OjqcnJ8T0x65pSO1CpV5lqliuP7sfzAOwC1RCQQCT0GjMfJ+yvHsBbrnVY02w04eIjk0Dpy3+bKVgohEpw==
+
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.npmjs.org/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz"
